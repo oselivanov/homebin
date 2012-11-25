@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+"""Virtual Box virtual machine quick starter.
+Run first virtual machine which name contain first script argument."""
+
+__author__ = 'Oleg Selivanov <oleg.a.selivanov@gmail.com>'
+
+import re
+import subprocess
+import sys
+
+if __name__ == '__main__':
+    p = subprocess.Popen(['VBoxManage', 'list', 'vms'], stdout=subprocess.PIPE)
+    out = p.communicate()[0]
+    vm_pairs = re.findall(r'(?m)^"([^"]+)" {(.*)}$', out)
+    for vm_name, vm_id in vm_pairs:
+        if sys.argv[1] in vm_name.lower():
+            subprocess.call(['VBoxManage', 'startvm', vm_id])
+            sys.exit(0)
+

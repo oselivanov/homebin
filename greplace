@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Author: Oleg Selivanov <oleg.a.selivanov@gmail.com>
+
+# Useful utility in addition to grep -P (I'm using alias) for batch replacing. 
+# First check for matches: 
+#   grep -P "cv[^\s]" . -r 
+# Then replace exactly the same matches:
+#   greplace "s/cv[^\s]/cv::\1/g" . -r 
+
+perl -pi -e $1 `grep -l "" $2 $3 $4 $5 $6 $7 $8 $9`

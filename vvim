@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Author: Oleg Selivanov <oleg.a.selivanov@gmail.com>
+# Light weight session starter for vim. 
+
+SESSION="$1"
+if [ -z "$SESSION" ]; then
+  SESSION=default
+fi
+vim -O3 -S ~/.vim/sessions/$SESSION --cmd "au VimLeave * call CleanAndSaveSession(\"$SESSION\")"
