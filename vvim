@@ -1,10 +1,23 @@
-#!/bin/sh
+#!/bin/bash
 
 # Author: Oleg Selivanov <oleg.a.selivanov@gmail.com>
-# Light weight session starter for vim. 
+# Light weight session starter for vim.
+
+if [ "$1" == "-l" ]; then
+  ls .vim/sessions
+  exit 0
+fi
+
+if [ "$1" == "-d" ]; then
+  rm ".vim/sessions/$2"
+  exit 0
+fi
 
 SESSION="$1"
 if [ -z "$SESSION" ]; then
   SESSION=default
 fi
-vim -O3 -S ~/.vim/sessions/$SESSION --cmd "au VimLeave * call CleanAndSaveSession(\"$SESSION\")"
+echo -e '\033k'vvim: $SESSION'\033\\'
+vim -O2 -S ~/.vim/sessions/$SESSION \
+        --cmd "au BufWrite * call SaveSession(\"$SESSION\")" \
+        --cmd "au VimEnter * call CloseInactiveAndHiddenBuffers()"

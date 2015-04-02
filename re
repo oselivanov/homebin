@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 """Remmina session quick starter.
-Find first remmina connection which name include all script arguments."""
+
+Find first remmina connection which name include all script arguments.
+"""
 
 __author__ = 'Oleg Selivanov <oleg.a.selivanov@gmail.com>'
 
@@ -19,6 +21,5 @@ if __name__ == '__main__':
         config.read(filename)
         name = config.get('remmina', 'name')
         if matched(name):
-            subprocess.call(['remmina', '-c', filename], shell=True)
+            subprocess.call(' '.join(['remmina', '-c', filename]), shell=True)
             sys.exit(0)
-

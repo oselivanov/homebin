@@ -16,4 +16,3 @@ if __name__ == '__main__':
         if sys.argv[1] in vm_name.lower():
             subprocess.call(['VBoxManage', 'startvm', vm_id])
             sys.exit(0)
-
